@@ -1,8 +1,9 @@
 import { Navigation } from 'react-native-navigation';
 import { registerScreens } from './src/screen/index';
 import { Provider } from 'react-redux';
-import store from './src/store/index';
+import configuerStore from './src/store/index';
 
+const { store } = configuerStore(() => { });
 // 执行注册页面方法
 registerScreens(store, Provider);
 
