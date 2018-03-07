@@ -33,6 +33,21 @@ class Home extends Component<Props> {
         >
           <Text style={styles.btnText}>减2</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.jumpBtn}
+          onPress={() => {
+            this.props.navigator.push({
+              screen: 'nextPage',
+              title: '下一页',
+              passProps: {
+                passData: 'hh'
+              }
+            });
+          }}
+        >
+          <Text style={styles.btnText}>跳转到NextPage</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -56,6 +71,15 @@ const styles = StyleSheet.create({
   },
   cutBtn: {
     backgroundColor: 'red',
+    width: 200,
+    height: 59,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10
+  },
+  jumpBtn: {
+    marginTop: 20,
+    backgroundColor: '#E3a4d3',
     width: 200,
     height: 59,
     justifyContent: 'center',
