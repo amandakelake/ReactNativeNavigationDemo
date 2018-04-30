@@ -35,7 +35,7 @@ Navigation.startTabBasedApp({
     }
   ],
   appStyle: {
-    navBarBackgroundColor: '#263136', //顶部导航栏背景颜色
+    navBarBackgroundColor: '#292f33', //顶部导航栏背景颜色
     navBarTextColor: 'white' //顶部导航栏字体颜色
   },
   tabsStyle: {

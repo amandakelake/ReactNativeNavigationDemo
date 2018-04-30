@@ -10,6 +10,7 @@
     "react": "^16.3.0-alpha.1",
     "react-native": "0.54.0",
     "react-native-navigation": "^1.1.398",
+    "react-native-root-siblings": "^3.0.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",

@@ -22,6 +22,14 @@ function* getUserInfo({ sucCb, errCB }) {
   }
 }
 
+function *fetchData() {
+  try {
+    const data = yield 
+  } catch (e) {
+
+  }
+}
+
 export const homeSagas = [
   takeLatest(actionTypes.HOME_GET_SOMEDATA, getUserInfo)
 ]

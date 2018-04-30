@@ -1,67 +1,66 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import RootSiblings from 'react-native-root-siblings';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as homeActions from '../../action/home';
 
+let sibling = new RootSiblings(<View
+  style={{top: 0,right: 0,bottom: 0,left: 0,backgroundColor: 'red'}}
+/>);
+
 type Props = {};
+
+const obj = { num: 1 };
 class Home extends Component<Props> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      b: null
+    }
+  }
+
+  componentWillMount() {
+    this.setState({
+      b: obj
+    })
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.b !== this.state.b
+  }
+
   render() {
+    console.log('重新渲染   re-render------------------');
     return (
       <View style={styles.container}>
-        <Text>Home</Text>
-        <Text>initCount: {this.props.home.initCount}</Text>
-
-        <TouchableOpacity
-          style={styles.addBtn}
-          onPress={() => {
-            this.props.homeActions.homeAdd({
-              initCount: this.props.home.initCount + 2
-            });
-          }}
-        >
-          <Text style={styles.btnText}>加2</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.cutBtn}
-          onPress={() => {
-            this.props.homeActions.homeCut({
-              initCount: this.props.home.initCount - 2
-            });
-          }}
-        >
-          <Text style={styles.btnText}>减2</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.jumpBtn}
-          onPress={() => {
-            this.props.navigator.push({
-              screen: 'nextPage',
-              title: '下一页',
-              passProps: {
-                passData: 'hh'
-              }
-            });
-          }}
-        >
-          <Text style={styles.btnText}>跳转到NextPage</Text>
+        <TouchableOpacity style={styles.addBtn} onPress={() => {
+          obj.num++;
+          this.setState({
+            b: obj
+          })
+        }}>
+          <Text>{this.state.b.num}</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
 
+
+
+
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#E6E6E6',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
   addBtn: {
-    backgroundColor: 'green',
+    backgroundColor: '#08cb6a',
     marginVertical: 20,
     width: 200,
     height: 59,

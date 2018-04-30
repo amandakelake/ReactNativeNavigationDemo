@@ -38,3 +38,9 @@ export function setSomeData(data) {
     })
   }
 }
+
+export function fetchSagaData() {
+  return {
+    type: actionTypes.HOME_FETCH_SAGA_DATA
+  }
+}
