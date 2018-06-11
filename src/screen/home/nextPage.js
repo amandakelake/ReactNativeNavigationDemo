@@ -13,32 +13,30 @@ class NextPage extends Component<Props> {
     this.state = {
       count: 0
     };
+    this.test();
   }
 
-  add() {
+  componentWillMount() {
+    console.log('will-count', this.state.count)
+  }
+
+  componentDidMount() {
+    console.log('Did-count', this.state.count)
+  }
+
+  test() {
     setTimeout(() => {
       this.setState({
-        count: this.state.count + 1
-      });
-      this.setState({
-        count: this.state.count + 1
-      });
-    }, 0);
+        count: 1
+      })
+    }, 5000)
   }
 
   render() {
+    console.log('render-count', this.state.count)
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.addBtn}
-          onPress={() => {
-            this.add();
-          }}
-        >
-          <Text style={styles.btnText}>点击+2</Text>
-        </TouchableOpacity>
-
-        <Text style={styles.commonText}>当前count {this.state.count}</Text>
+        <Text style={styles.btnText}>{this.state.count}</Text>
       </View>
     );
   }

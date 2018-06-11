@@ -6,51 +6,66 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as homeActions from '../../action/home';
 
-let sibling = new RootSiblings(<View
-  style={{top: 0,right: 0,bottom: 0,left: 0,backgroundColor: 'red'}}
-/>);
+let sibling = new RootSiblings(
+  (
+    <View
+      style={{ top: 0, right: 0, bottom: 0, left: 0, backgroundColor: 'red' }}
+    />
+  )
+);
 
 type Props = {};
 
-const obj = { num: 1 };
 class Home extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      b: null
+      a: 1
+    };
+    this.optimize = this.optimize.bind(this);
+    this.navigateToNextPage = this.navigateToNextPage.bind(this);
+    this.navigateToLayoutAnimation = this.navigateToLayoutAnimation.bind(this);
+  }
+
+  optimize() {
+    requestAnimationFrame(this.navigateToNextPage)
+  }
+
+  navigateToNextPage() {
+    let i = 0;
+    for (i; i < 1000; i++) {
+      this.setState({
+        a: i
+      })
+      if (i === 999) {
+        this.props.navigator.push({
+          screen: 'nextPage',
+          title: '下一页'
+        });
+      }
     }
   }
 
-  componentWillMount() {
-    this.setState({
-      b: obj
-    })
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextState.b !== this.state.b
+  navigateToLayoutAnimation() {
+    this.props.navigator.push({
+      screen: 'layoutAninationDemo',
+      title: 'layoutAnination演示'
+    });
   }
 
   render() {
-    console.log('重新渲染   re-render------------------');
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.addBtn} onPress={() => {
-          obj.num++;
-          this.setState({
-            b: obj
-          })
-        }}>
-          <Text>{this.state.b.num}</Text>
+        <TouchableOpacity style={styles.addBtn} onPress={this.navigateToNextPage}>
+          <Text>大量计算操作 {this.state.a}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.addBtn} onPress={this.navigateToLayoutAnimation}>
+          <Text>LayoutAnimation</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
-
-
-
-
 
 const styles = StyleSheet.create({
   container: {
